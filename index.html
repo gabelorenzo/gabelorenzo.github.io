@@ -16,6 +16,9 @@
     <!-- Custom styles for this template -->
     <link href="css/1-col-portfolio.css" rel="stylesheet">
 
+    <!-- Font Awesome CDN (TODO: Import Font Awesome CSS) -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
   </head>
 
   <body>
@@ -49,16 +52,39 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container" id="app">
 
       <!-- Page Heading -->
       <h1 class="my-4">Page Heading
         <small>Secondary Text</small>
       </h1>
 
+      <!-- Search Bar -->
+      <div class="row">
+        <div class="col-12 col-md-7 col-lg-7">
+          <form class="card card-sm">
+            <div class="card-body row no-gutters align-items-center">
+              <div class="col-auto">
+                <i class="fas fa-search h4 text-body"></i>
+              </div>
+              <!--end of col-->
+              <div class="col">
+                  <input type="text" v-model="search" class="form-control form-control-lg form-control-borderless" placeholder="Search projects by title">
+              </div>
+              <!--end of col-->
+            </div>
+          </form>
+        </div>
+          <!--end of col-->
+      </div>
+
+      <br>
+
+      <!-- Project Content -->
+      <h1 v-if="!filteredProjects.length">Sorry, no projects match that search</h1>
       <div id="projects-list">
         <div is="project-item"
-            v-for="(project, index) in projects"
+            v-for="(project, index) in filteredProjects"
             v-bind:title="project.title"
             v-bind:link="project.link"
             v-bind:description="project.description"
@@ -67,8 +93,6 @@
             v-bind:key="project.id"
         ></div>
       </div>
-
-      <hr>
 
     </div>
     <!-- /.container -->
@@ -90,66 +114,74 @@
 
     <!-- Custom JavaScript -->
     <script type="text/javascript">
-
         /** A component with a template for a single Project. */
         Vue.component('project-item', {
 
             /** Template for an individual Project item */
             template: '\
-                <div class="project-item-template">\
-                    <div class="row">\
-                        <div class="col-md-7">\
-                          <a href="#">\
-                            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x400" alt="">\
-                          </a>\
-                        </div>\
-                        <div class="col-md-5">\
-                          <h3>{{ title }}</h3>\
-                          <p>{{ description }}</p>\
-                          <a class="btn btn-primary" v-bind:href="link" target="_blank">View Project</a>\
-                        </div>\
-                    </div>\
-                    <hr>\
-                </div>',
+              <div class="project-item-template">\
+                <div class="row">\
+                  <div class="col-md-7">\
+                    <a href="#">\
+                      <img class="img-fluid rounded mb-3 mb-md-0" v-bind:src="pictures" alt="">\
+                    </a>\
+                  </div>\
+                <div class="col-md-5">\
+                  <h3>{{ title }}</h3>\
+                  <p>{{ description }}</p>\
+                  <a class="btn btn-primary" v-bind:href="link" target="_blank">View Project</a>\
+                </div>\
+                </div>\
+                <hr>\
+              </div>',
 
             props: ['title', 'link', 'description', 'pictures'],
 
         });
 
+        // TODO: "pictures" will be an array of strings, which the thumbnail will cycle through
         new Vue({
-            el: '#projects-list',
+            el: '#app',
             data: {
+                search: '',
                 projects: [
                     {
                         id: 1,
                         title: "Project One",
-                        link: "https://www.youtube.com",
+                        link: "https://www.google.com",
                         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.",
-                        pictures: ["http://placehold.it/700x300"]  
+                        pictures: "images/700x400.png",
                     },
                     {
                         id: 2,
                         title: "Project Two",
-                        link: "https://www.youtube.com",
+                        link: "https://www.google.com",
                         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.",
-                        pictures: ["http://placehold.it/700x300"]  
+                        pictures: "images/700x400.png",
                     },
                     {
                         id: 3,
                         title: "Project Three",
-                        link: "https://www.youtube.com",
+                        link: "https://www.google.com",
                         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, temporibus, dolores, at, praesentium ut unde repudiandae voluptatum sit ab debitis suscipit fugiat natus velit excepturi amet commodi deleniti alias possimus!",
-                        pictures: ["http://placehold.it/700x300"]  
+                        pictures: "images/700x400.png",
                     },
                     {
                         id: 4,
                         title: "Project Four",
-                        link: "https://www.youtube.com",
+                        link: "https://www.google.com",
                         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, quidem, consectetur, officia rem officiis illum aliquam perspiciatis aspernatur quod modi hic nemo qui soluta aut eius fugit quam in suscipit?",
-                        pictures: ["http://placehold.it/700x300"]  
+                        pictures: "images/700x400.png",
                     },
                 ]
-            }
+            },
+            computed: {
+                filteredProjects() {
+                    return this.projects.filter(project => {
+                        return project.title.toLowerCase().includes(this.search.toLowerCase())
+                    });
+                },
+            },
         });
     </script>
 

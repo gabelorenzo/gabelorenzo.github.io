@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 /*!
  * Start Bootstrap - 1 Col Portfolio (https://startbootstrap.com/template-overviews/1-col-portfolio)
  * Copyright 2013-2018 Start Bootstrap
@@ -6,6 +8,7 @@
 
 body {
   padding-top: 54px;
+  font-family: 'Montserrat';
 }
 
 @media (min-width: 992px) {
@@ -16,4 +19,29 @@ body {
 
 .pagination {
   margin-bottom: 15px;
+}
+
+/** Search bar */
+.form-control-borderless {
+    border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/** Project Images */
+.project-img:hover {
+    -webkit-filter: grayscale(50%);
+}
+.project-image {
+    width: 700px;
+    height: 400px;
+}
+
+/** Navbar */
+.navbar {
+    font-weight: bold;
 }
