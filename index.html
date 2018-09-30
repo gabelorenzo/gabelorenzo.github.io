@@ -21,8 +21,7 @@
 
   </head>
 
-  <body>
-
+  <body class="fade-out">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
@@ -69,7 +68,7 @@
               </div>
               <!--end of col-->
               <div class="col">
-                  <input type="text" v-model="search" class="form-control form-control-lg form-control-borderless" placeholder="Search projects by title">
+                  <input type="text" v-model="search" class="form-control form-control-lg form-control-borderless" placeholder="Search projects by title or tag">
               </div>
               <!--end of col-->
             </div>
@@ -89,6 +88,7 @@
             v-bind:link="project.link"
             v-bind:description="project.description"
             v-bind:pictures="project.pictures"
+            v-bind:tags="project.tags"
             v-bind:index="index"
             v-bind:key="project.id"
         ></div>
@@ -114,71 +114,96 @@
 
     <!-- Custom JavaScript -->
     <script type="text/javascript">
+        $(function() {
+            $('body').removeClass('fade-out');
+        });
+    </script>
+
+    <script type="text/javascript">
+        // TODO: "pictures" will be an array of strings, which the thumbnail will cycle through
+        const projectData = [
+            {
+                id: 1,
+                title: "Project One",
+                link: "https://www.google.com",
+                description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem
+                    expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos
+                    perspiciatis atque eveniet unde.`,
+                pictures: "images/700x400.png",
+                tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
+            },
+            {
+                id: 2,
+                title: "Project Two",
+                link: "https://www.google.com",
+                description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero
+                    doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus!
+                    Velit, esse totam tempore.`,
+                pictures: "images/700x400.png",
+                tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
+            },
+            {
+                id: 3,
+                title: "Project Three",
+                link: "https://www.google.com",
+                description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, temporibus, dolores, at,
+                    praesentium ut unde repudiandae voluptatum sit ab debitis suscipit fugiat natus velit excepturi amet
+                    commodi deleniti alias possimus!`,
+                pictures: "images/700x400.png",
+                tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
+            },
+            {
+                id: 4,
+                title: "Project Four",
+                link: "https://www.google.com",
+                description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, quidem, consectetur,
+                    officia rem officiis illum aliquam perspiciatis aspernatur quod modi hic nemo qui soluta aut eius fugit
+                    quam in suscipit?`,
+                pictures: "images/700x400.png",
+                tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
+            },
+        ];
+
         /** A component with a template for a single Project. */
         Vue.component('project-item', {
 
             /** Template for an individual Project item */
-            template: '\
-              <div class="project-item-template">\
-                <div class="row">\
-                  <div class="col-md-7">\
-                    <a href="#">\
-                      <img class="img-fluid rounded mb-3 mb-md-0" v-bind:src="pictures" alt="">\
-                    </a>\
-                  </div>\
-                <div class="col-md-5">\
-                  <h3>{{ title }}</h3>\
-                  <p>{{ description }}</p>\
-                  <a class="btn btn-primary" v-bind:href="link" target="_blank">View Project</a>\
-                </div>\
-                </div>\
-                <hr>\
-              </div>',
+            template: `
+              <div class="project-item-template">
+                <div class="row">
+                  <div class="col-md-7">
+                    <a href="#">
+                      <img class="img-fluid rounded mb-3 mb-md-0" v-bind:src="pictures" alt="">
+                    </a>
+                  </div>
+                  <div class="col-md-5">
+                    <h3>{{ title }}</h3>
+                    <p>{{ description }}</p>
+                    <p v-if="tags.length" class="tags">
+                        <b>Tags: </b>
+                        <span v-for="(tag, index) in tags"><a href="#">{{ tag }}</a></span>
+                    </p>
+                    <a class="btn btn-primary" v-bind:href="link" target="_blank">View Project</a>
+                  </div>
+                </div>
+                <hr>
+              </div>`,
 
-            props: ['title', 'link', 'description', 'pictures'],
-
+            props: ['title', 'link', 'description', 'pictures', 'tags'],
         });
 
-        // TODO: "pictures" will be an array of strings, which the thumbnail will cycle through
         new Vue({
             el: '#app',
             data: {
                 search: '',
-                projects: [
-                    {
-                        id: 1,
-                        title: "Project One",
-                        link: "https://www.google.com",
-                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.",
-                        pictures: "images/700x400.png",
-                    },
-                    {
-                        id: 2,
-                        title: "Project Two",
-                        link: "https://www.google.com",
-                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.",
-                        pictures: "images/700x400.png",
-                    },
-                    {
-                        id: 3,
-                        title: "Project Three",
-                        link: "https://www.google.com",
-                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, temporibus, dolores, at, praesentium ut unde repudiandae voluptatum sit ab debitis suscipit fugiat natus velit excepturi amet commodi deleniti alias possimus!",
-                        pictures: "images/700x400.png",
-                    },
-                    {
-                        id: 4,
-                        title: "Project Four",
-                        link: "https://www.google.com",
-                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, quidem, consectetur, officia rem officiis illum aliquam perspiciatis aspernatur quod modi hic nemo qui soluta aut eius fugit quam in suscipit?",
-                        pictures: "images/700x400.png",
-                    },
-                ]
+                projects: projectData,
             },
             computed: {
                 filteredProjects() {
                     return this.projects.filter(project => {
-                        return project.title.toLowerCase().includes(this.search.toLowerCase())
+                        let byTitle = project.title.toLowerCase().includes(this.search.toLowerCase());
+                        let byTag = project.tags.join(" ").toLowerCase().includes(this.search.toLowerCase());
+                        return byTitle || byTag;
                     });
                 },
             },
