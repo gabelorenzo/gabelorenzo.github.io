@@ -10,15 +10,11 @@
 
     <title>1 Col Portfolio - Start Bootstrap Template</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="css/1-col-portfolio.css" rel="stylesheet">
-
     <!-- Font Awesome CDN (TODO: Import Font Awesome CSS) -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-
+    <link href="vendor/fancybox/jquery.fancybox.min.css" rel="stylesheet">
   </head>
 
   <body class="fade-out">
@@ -105,22 +101,16 @@
       <!-- /.container -->
     </footer>
 
-    <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Vue.js JavaScript Development Version-->
     <script src="vendor/vue/vue.js"></script>
-
-    <!-- Custom JavaScript -->
+    <script src="vendor/fancybox/jquery.fancybox.min.js"></script>
     <script type="text/javascript">
         $(function() {
             $('body').removeClass('fade-out');
         });
     </script>
-
     <script type="text/javascript">
-        // TODO: "pictures" will be an array of strings, which the thumbnail will cycle through
         const projectData = [
             {
                 id: 1,
@@ -129,7 +119,14 @@
                 description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem
                     expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos
                     perspiciatis atque eveniet unde.`,
-                pictures: "images/700x400.png",
+                pictures: [
+                    {
+                        fullSize: "images/700x400.png",
+                        thumbnail: "images/700x400.png",
+                        fancyBoxGroup: "group-1",
+                        fancyBoxCaption: "First Image",
+                    },
+                ],
                 tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
             },
             {
@@ -139,7 +136,14 @@
                 description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero
                     doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus!
                     Velit, esse totam tempore.`,
-                pictures: "images/700x400.png",
+                pictures: [
+                    {
+                        fullSize: "images/700x400.png",
+                        thumbnail: "images/700x400.png",
+                        fancyBoxGroup: "group-2",
+                        fancyBoxCaption: "First Image",
+                    },
+                ],
                 tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
             },
             {
@@ -149,7 +153,14 @@
                 description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, temporibus, dolores, at,
                     praesentium ut unde repudiandae voluptatum sit ab debitis suscipit fugiat natus velit excepturi amet
                     commodi deleniti alias possimus!`,
-                pictures: "images/700x400.png",
+                pictures: [
+                    {
+                        fullSize: "images/700x400.png",
+                        thumbnail: "images/700x400.png",
+                        fancyBoxGroup: "group-3",
+                        fancyBoxCaption: "First Image",
+                    },
+                ],
                 tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
             },
             {
@@ -159,12 +170,44 @@
                 description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, quidem, consectetur,
                     officia rem officiis illum aliquam perspiciatis aspernatur quod modi hic nemo qui soluta aut eius fugit
                     quam in suscipit?`,
-                pictures: "images/700x400.png",
+                pictures: [
+                    {
+                        fullSize: "images/700x400.png",
+                        thumbnail: "images/700x400.png",
+                        fancyBoxGroup: "group-4",
+                        fancyBoxCaption: "First Image",
+                    },
+                ],
                 tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
             },
         ];
 
-        /** A component with a template for a single Project. */
+        /**
+         * A component with a template for a single Picture belonging to a Project.
+         * Utilizes the Fancybox 3 plugin allowing a clickable thumbnail that displays a larger image.
+         * @prop {string} fullSize The image that displays when the thumbnail clicked
+         * @prop {string} thumbnail The thumbnail image that shows along with the project
+         * @prop {string} fancyBoxGroup A string that groups images of a project together
+         * @prop {fancyBoxCaption} The caption that shows for the full-sized image when clicked.
+         */
+        Vue.component('project-image', {
+            template: `
+                <a v-bind:href="fullSize" v-bind:data-fancybox="fancyBoxGroup" v-bind:data-caption="fancyBoxCaption">
+                    <img class="img-fluid rounded mb-3 mb-md-0" v-bind:src="thumbnail" alt="" />
+                </a>
+            `,
+
+            props: [ 'fullSize', 'thumbnail', 'fancyBoxGroup', 'fancyBoxCaption' ],
+        });
+
+        /**
+         * A component with a template for a single Project.
+         * @prop {string} title The title of the Project.
+         * @prop {string} link An optional link for the Project.
+         * @prop {string} description The description of the Project.
+         * @prop {object[]} An array of objects each representing a picture for the Project.
+         * @prop {string[]} An array of strings each representing a searchable tag for the Project.
+         */
         Vue.component('project-item', {
 
             /** Template for an individual Project item */
@@ -172,9 +215,15 @@
               <div class="project-item-template">
                 <div class="row">
                   <div class="col-md-7">
-                    <a href="#">
-                      <img class="img-fluid rounded mb-3 mb-md-0" v-bind:src="pictures" alt="">
-                    </a>
+                    <div is="project-image"
+                      v-for="(picture, index) in pictures"
+                      v-bind:fullSize="picture.fullSize"
+                      v-bind:thumbnail="picture.thumbnail"
+                      v-bind:fancyBoxGroup="picture.fancyBoxGroup"
+                      v-bind:fancyBoxCaption="picture.fancyBoxCaption"
+                      v-bind:index="index"
+                      v-bind:key="index"
+                    ></div>
                   </div>
                   <div class="col-md-5">
                     <h3>{{ title }}</h3>
