@@ -43,7 +43,12 @@ body {
 
 /** Navbar */
 .navbar {
-    font-weight: bold;
+  background-color: #FFF !important;
+  border-bottom: 1px solid #b5b5b5;
+}
+.navbar a {
+    /*color: #34f9b1 !important;*/
+    color: gray !important;
 }
 
 /** Tags */

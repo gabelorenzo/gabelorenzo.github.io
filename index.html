@@ -18,49 +18,45 @@
   </head>
 
   <body class="fade-out">
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">Gabe Lorenzo's Coding Portfolio</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://www.linkedin.com/in/gabelorenzo/">LinkedIn</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://github.com/gabelorenzo">GitHub</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
 
     <!-- Page Content -->
     <div class="container" id="app">
 
-      <br>
-
-      <!-- Search Bar -->
-      <div class="row">
-        <div class="col-12 col-md-7 col-lg-7">
-          <form class="card card-sm">
-            <div class="card-body row no-gutters align-items-center">
-              <div class="col-auto">
-                <i class="fas fa-search h4 text-body"></i>
-              </div>
-              <div class="col">
-                  <input type="text" v-model="search" class="form-control form-control-lg form-control-borderless" placeholder="Search projects by title or tag">
-              </div>
-            </div>
-          </form>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#">Gabe Lorenzo</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">About Me</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://www.linkedin.com/in/gabelorenzo/"><i class="fab fa-linkedin-in"></i></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://github.com/gabelorenzo"><i class="fab fa-github"></i></a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+        <form class="form-inline">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+            </div>
+            <input type="text" v-model="search" class="form-control" placeholder="Search Projects" aria-label="Search" aria-describedby="basic-addon1">
+          </div>
+        </form>
+      </nav>
+
+      <br></br>
+
+      <h1>Welcome to my Portfolio!</h1>
+      <p>I am a Software Developer based in Rocky Hill, CT. Here are some of the coding projects I've worked on, both personal and professional.</p>
 
       <br>
 
