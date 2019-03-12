@@ -32,13 +32,13 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" href="#">About Me</a>
+                <a class="nav-link" href="#"><i class="fa fa-info-circle fa-lg" title="About Me" aria-hidden="true"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="https://www.linkedin.com/in/gabelorenzo/"><i class="fab fa-linkedin-in"></i></a>
+                <a class="nav-link" href="https://www.linkedin.com/in/gabelorenzo/"><i class="fab fa-linkedin-in fa-lg" title="LinkedIn"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="https://github.com/gabelorenzo"><i class="fab fa-github"></i></a>
+                <a class="nav-link" href="https://github.com/gabelorenzo"><i class="fab fa-github fa-lg" title="GitHub"></i></a>
               </li>
             </ul>
           </div>
@@ -125,7 +125,7 @@
                         fancyBoxCaption: "",
                     },
                 ],
-                tags: ["Process Automation", "Scala", "Play", "Backbone.js", "PostgresSQL"],
+                tags: ["Jaroop", "Process Automation", "Scala", "Play", "Backbone.js", "SQL"],
             },
             {
                 id: 2,
@@ -150,7 +150,7 @@
                         fancyBoxCaption: "",
                     },
                 ],
-                tags: ["IOT", "Scala", "Play", "Backbone.js", "PostgresSQL"],
+                tags: ["IOT", "Scala", "Play", "Backbone.js", "SQL", "Jaroop"],
             },
             {
                 id: 3,
@@ -182,15 +182,16 @@
                         fancyBoxCaption: "",
                     },
                 ],
-                tags: ["SaaS", "Scala", "Play", "Backbone.js", "MySQL"],
+                tags: ["SaaS", "Scala", "Play", "Backbone.js", "SQL", "Jaroop"],
             },
             {
                 id: 4,
                 title: "Cochran Marine",
                 link: "https://www.jaroop.com/software-services/custom-software-development/software-solutions/data-management/#1488469504424-bf8e98d5-2363",
-                description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, quidem, consectetur,
-                    officia rem officiis illum aliquam perspiciatis aspernatur quod modi hic nemo qui soluta aut eius fugit
-                    quam in suscipit?`,
+                description: `
+                    The Cochran Marine Shore Power Database provides robust data management and hardware monitoring capabilities while delivering data science
+                    insights to the Cochran Marine team.
+                `,
                 pictures: [
                     {
                         fullSize: "images/cochran-laptop-full.jpg",
@@ -199,7 +200,7 @@
                         fancyBoxCaption: "",
                     },
                 ],
-                tags: ["Data Management", "Scala", "Play", "Bakcbone.js", "MySQL"],
+                tags: ["Data Management", "Scala", "Play", "Bakcbone.js", "SQL", "Jaroop"],
             },
             {
               id: 5,
@@ -218,7 +219,7 @@
                   fancyBoxCaption: "Insuracy Home Page",
                 },
               ],
-              tags: [ "Scala", "Play", "Backbone.js", "PostgresSQL"]
+              tags: [ "Scala", "Play", "Backbone.js", "SQL", "Jaroop"]
             },
         ];
 
@@ -295,13 +296,13 @@
                     </div>
                   </div>
                   <div class="col-md-5">
-                    <h3>{{ title }}</h3>
+                    <h4 class="project-title">{{ title }}</h4>
                     <p>{{ description }}</p>
                     <p v-if="tags.length" class="tags">
-                        <b>Tags: </b>
+                        <span class="tags-header">Tags: </span><br>
                         <span v-for="(tag, index) in tags"><a href="#">{{ tag }}</a></span>
                     </p>
-                    <a class="btn btn-primary" v-bind:href="link" target="_blank">View Project</a>
+                    <a class="btn btn-primary button button-1 button-1a" v-bind:href="link" target="_blank">View Project</a>
                   </div>
                 </div>
                 <hr>
