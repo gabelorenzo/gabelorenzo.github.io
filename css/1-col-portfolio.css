@@ -9,6 +9,8 @@
 body {
   padding-top: 54px;
   font-family: 'Montserrat';
+  background-color: #1e1e2f !important;
+  color: #FFF !important;
 }
 
 @media (min-width: 992px) {
@@ -33,6 +35,19 @@ body {
 }
 
 /** Project Images */
+.project-item-template {
+  margin-bottom: 50px;
+}
+
+.project-title {
+  display: inline-block;
+  margin: 0px !important;
+}
+
+.view-project-btn {
+  float: right;
+}
+
 .project-img:hover {
     -webkit-filter: grayscale(50%);
 }
@@ -42,17 +57,19 @@ body {
 }
 
 /** Navbar */
-.navbar {
-  background-color: #FFF !important;
-  border-bottom: 1px solid #b5b5b5;
+.navbar-brand {
+  color: #96f2a4; !important;
 }
-.navbar a {
-    /*color: #34f9b1 !important;*/
+.navbar {
+  background-color: #1e1e2f !important;
+  border-bottom: 1px solid #717171 ;
+}
+.nav-link {
     color: gray !important;
 }
 
 /** Tags */
-.tags a{border:1px solid #DDD;display:inline-block;color:#717171;background:#FFF;-webkit-box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);-webkit-transition:all .1s ease-in-out;-moz-transition:all .1s ease-in-out;-o-transition:all .1s ease-in-out;-ms-transition:all .1s ease-in-out;transition:all .1s ease-in-out;border-radius:2px;margin:0 3px 6px 0;padding:5px 10px}
+.tags a{border:1px solid #96f2a4;;display:inline-block;color:#96f2a4;;-webkit-box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);-webkit-transition:all .1s ease-in-out;-moz-transition:all .1s ease-in-out;-o-transition:all .1s ease-in-out;-ms-transition:all .1s ease-in-out;transition:all .1s ease-in-out;border-radius:2px;margin:0 3px 6px 0;padding:5px 10px}
 .tags a:hover{border-color:#08C;}
 
 .tags a {
@@ -72,10 +89,6 @@ body {
 body.fade-out {
     opacity: 0;
     transition: none;
-}
-
-.project-title {
-  font-weight: bold;
 }
 
 /* https://bootsnipp.com/snippets/Oeo2N */
@@ -111,13 +124,19 @@ body.fade-out {
 
 /* Button 1 */
 .button-1 {
-    border: 2px solid #717171;
-    color: #717171;
+    color: #ef49ff;
+    border: 2px solid #ef49ff;
 }
 /* Button 1a */
 .button-1a:hover,
 .button-1a:active {
     color: #96f2a4;
     border-color: #96f2a4;
-    background: #fff;
+    background: inherit;
+}
+
+/** Bootstrap Overrides */
+.card, .card-header {
+  border-color: #717171 !important;
+  background-color: #32325d !important;
 }

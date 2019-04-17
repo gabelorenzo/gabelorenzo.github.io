@@ -25,7 +25,7 @@
       <!-- Navigation -->
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-          <a class="navbar-brand" href="#">Gabe Lorenzo</a>
+          <a class="navbar-brand" href="#">MY PORTFOLIO</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -48,21 +48,25 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
             </div>
-            <input type="text" v-model="search" class="form-control" placeholder="Search Projects" aria-label="Search" aria-describedby="basic-addon1">
+            <input type="text" v-model="search" class="form-control" placeholder="Search by name or tag" aria-label="Search" aria-describedby="basic-addon1">
           </div>
         </form>
       </nav>
 
-      <br></br>
-
-      <h1>Welcome to my Portfolio!</h1>
-      <p>I am a Software Developer based in Rocky Hill, CT. Here are some of the coding projects I've worked on, both personal and professional.</p>
-
       <br>
+
+      <h1>Projects</h1>
+
+      <h5>
+        <div v-if="filteredProjects.length > 0">
+          Showing {{ filteredProjects.length }} of {{ projects.length }} projects
+        </div>
+        <div v-else>Showing {{ filteredProjects.length }} of {{ projects.length }} projects</b></div>
+      </h5>
 
       <!-- Project Content -->
       <div id="projects-list">
-        <h1 v-if="!filteredProjects.length">Sorry, no projects match that search</h1>
+        <h1 v-if="!filteredProjects.length" class="jumbotron">No results for <b>{{search}}</b></h1>
         <project-item
             v-for="(project, index) in filteredProjects"
             v-bind:id="project.id"
@@ -79,9 +83,9 @@
     </div>
     <!-- /.container -->
 
-    <footer class="py-5 bg-dark">
+    <footer class="py-5 bg-transparent">
       <div class="container">
-        <p class="m-0 text-center text-white">&copy; Gabe Lorenzo 2019</p>
+        <p class="m-0 text-center">&copy; Gabe Lorenzo 2019</p>
       </div>
     </footer>
 
@@ -262,8 +266,12 @@
 
             /** Template for an individual Project item */
             template: `
-              <div class="project-item-template">
-                <div class="row">
+              <div class="card project-item-template">
+                <div class="card-header">
+                  <h4 class="project-title">{{ title }}</h4>
+                  <a class="btn btn-primary button button-1 button-1a view-project-btn" v-bind:href="link" target="_blank">View Project</a>
+                </div>
+                <div class="row card-body">
                   <div class="col-md-7">
                     <div v-bind:id="['project-image-carousel-' + id]" class="carousel slide">
                       <ol v-if="pictures.length > 1" class="carousel-indicators">
@@ -296,17 +304,15 @@
                     </div>
                   </div>
                   <div class="col-md-5">
-                    <h4 class="project-title">{{ title }}</h4>
                     <p>{{ description }}</p>
                     <p v-if="tags.length" class="tags">
                         <span class="tags-header">Tags: </span><br>
                         <span v-for="(tag, index) in tags"><a href="#">{{ tag }}</a></span>
                     </p>
-                    <a class="btn btn-primary button button-1 button-1a" v-bind:href="link" target="_blank">View Project</a>
                   </div>
                 </div>
-                <hr>
-              </div>`,
+              </div>
+            `,
 
             props: {
                 id: Number,
