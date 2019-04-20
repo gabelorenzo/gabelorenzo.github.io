@@ -12,6 +12,7 @@
 
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/1-col-portfolio.css" rel="stylesheet">
+    <link href="css/sidebar.css" rel="stylesheet">
     <!-- Font Awesome CDN (TODO: Import Font Awesome CSS) -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link href="vendor/fancybox/jquery.fancybox.min.css" rel="stylesheet">
@@ -20,12 +21,12 @@
   <body class="fade-out">
 
     <!-- Page Content -->
-    <div class="container" id="app">
+    <div class="page-wrapper chiller-theme toggled" id="app">
 
-      <!-- Navigation -->
+      <!-- Top Navigation -->
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-          <a class="navbar-brand" href="#">MY PORTFOLIO</a>
+          <a class="navbar-brand" href="#"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -43,51 +44,130 @@
             </ul>
           </div>
         </div>
-        <form class="form-inline">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-            </div>
-            <input type="text" v-model="search" class="form-control" placeholder="Search by name or tag" aria-label="Search" aria-describedby="basic-addon1">
-          </div>
-        </form>
       </nav>
 
-      <br>
-
-      <h1>Projects</h1>
-
-      <h5>
-        <div v-if="filteredProjects.length > 0">
-          Showing {{ filteredProjects.length }} of {{ projects.length }} projects
+      <!-- Side Navigation -->
+      <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+      </a>
+      <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-content">
+          <div class="sidebar-brand">
+            <a href="#"></a>
+            <div id="close-sidebar">
+              <i class="fas fa-bars"></i>
+            </div>
+          </div>
+          <div class="sidebar-header">
+            <div class="user-pic">
+              <img class="img-responsive img-rounded" src="images/gabe-profile-pic.png"
+                alt="User picture">
+            </div>
+            <div class="user-info">
+              <span class="user-name">
+                Gabe Lorenzo
+              </span>
+              <span class="user-role">Software Developer</span>
+            </div>
+          </div>
+          <!-- sidebar-header  -->
+          <div class="sidebar-search">
+            <div>
+              <div class="input-group">
+                <input type="text" v-model="search" class="form-control search-menu" placeholder="Search projects" aria-label="Search" aria-describedby="basic-addon1">
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- sidebar-search  -->
+          <div class="sidebar-menu">
+            <ul>
+              <li class="header-menu">
+                <span>More Details</span>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-book"></i>
+                  <span>About Me</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-calendar"></i>
+                  <span>Experience</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-folder"></i>
+                  <span>Education</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-folder"></i>
+                  <span>Contact</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- sidebar-menu  -->
         </div>
-        <div v-else>Showing {{ filteredProjects.length }} of {{ projects.length }} projects</b></div>
-      </h5>
+        <!-- sidebar-content  -->
+        <div class="sidebar-footer">
+          <a href="#">
+            <i class="fab fa-linkedin-in fa-lg"></i>
+          </a>
+          <a href="https://github.com/gabelorenzo">
+            <i class="fab fa-github fa-lg"></i>
+          </a>
+          <a href="#">
+            <i class="fa fa-cog"></i>
+          </a>
+        </div>
+      </nav>
+      <!-- sidebar-wrapper  -->
 
-      <!-- Project Content -->
-      <div id="projects-list">
-        <h1 v-if="!filteredProjects.length" class="jumbotron">No results for <b>{{search}}</b></h1>
-        <project-item
-            v-for="(project, index) in filteredProjects"
-            v-bind:id="project.id"
-            v-bind:title="project.title"
-            v-bind:link="project.link"
-            v-bind:description="project.description"
-            v-bind:pictures="project.pictures"
-            v-bind:tags="project.tags"
-            v-bind:index="index"
-            v-bind:key="project.id"
-        ></project-item>
-      </div>
+      <main class="page-content">
+        <div class="container-fluid">
+          <h1>My Portfolio</h1>
 
+          <h5>
+            <div v-if="filteredProjects.length > 0">
+              Showing {{ filteredProjects.length }} of {{ projects.length }} projects
+            </div>
+            <div v-else>Showing {{ filteredProjects.length }} of {{ projects.length }} projects</div>
+          </h5>
+
+          <!-- Project Content -->
+          <div id="projects-list">
+            <h1 v-if="!filteredProjects.length" class="jumbotron">No results for <b>{{search}}</b></h1>
+            <project-item
+                v-for="(project, index) in filteredProjects"
+                v-bind:id="project.id"
+                v-bind:title="project.title"
+                v-bind:link="project.link"
+                v-bind:description="project.description"
+                v-bind:pictures="project.pictures"
+                v-bind:tags="project.tags"
+                v-bind:index="index"
+                v-bind:key="project.id"
+            ></project-item>
+          </div>
+        </div>
+      </main>
+
+      <footer class="py-5 bg-transparent">
+        <div class="container">
+          <p class="m-0 text-center">&copy; Gabe Lorenzo 2019</p>
+        </div>
+      </footer>
     </div>
-    <!-- /.container -->
 
-    <footer class="py-5 bg-transparent">
-      <div class="container">
-        <p class="m-0 text-center">&copy; Gabe Lorenzo 2019</p>
-      </div>
-    </footer>
 
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -102,6 +182,36 @@
             $('.carousel').on('slide.bs.carousel', function () {
                 $(this).carousel('pause');
             });
+
+            $(".sidebar-dropdown > a").click(function() {
+              $(".sidebar-submenu").slideUp(200);
+              if (
+                $(this)
+                  .parent()
+                  .hasClass("active")
+              ) {
+                $(".sidebar-dropdown").removeClass("active");
+                $(this)
+                  .parent()
+                  .removeClass("active");
+              } else {
+                $(".sidebar-dropdown").removeClass("active");
+                $(this)
+                  .next(".sidebar-submenu")
+                  .slideDown(200);
+                $(this)
+                  .parent()
+                  .addClass("active");
+              }
+            });
+
+            $("#close-sidebar").click(function() {
+              $(".page-wrapper").removeClass("toggled");
+            });
+            $("#show-sidebar").click(function() {
+              $(".page-wrapper").addClass("toggled");
+            });
+
         });
     </script>
     <script type="text/javascript">
@@ -129,7 +239,7 @@
                         fancyBoxCaption: "",
                     },
                 ],
-                tags: ["Jaroop", "Process Automation", "Scala", "Play", "Backbone.js", "SQL"],
+                tags: ["Jaroop", "Process Automation", "Scala", "Backbone.js", "SQL"],
             },
             {
                 id: 2,
