@@ -3147,7 +3147,7 @@ li .fa {
   right: 0;
   font-size: 18px;
   line-height: 30px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   top: 50%;
   margin-top: 30px;
   margin-top: -2px;
